@@ -1,15 +1,15 @@
 from rest_framework import serializers
-from rest_framework.serializers import HyperlinkedModelSerializer
 
 from django.contrib.auth.models import User
 from lessons.models import Lesson
 
-class UserSerializer(serializers.HyperLinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email')
-
-class LessonSerializer(serializers.HyperLinkedModelSerializer):
-    class Meta: 
-        model = Lesson
-        fields = ('lesson_id', 'date', 'description')
+class LessonSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    date = serializers.DateTimeField(auto_now=False)
+    description = serializers.CharField(max_length=200, null=False)
+    subscription_id = serializers.ForeignKey(
+        'Subscription', 
+        on_delete=models.CASCADE,
+    )
+    insert_date = serializers.DateField(auto_now=True)
+    update_date = serializers.DateTimeField(auto_now=True)
