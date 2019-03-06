@@ -5,11 +5,7 @@ from lessons.models import Lesson
 
 class LessonSerializer(serializers.Serializer):
     id = serializers.IntegerField()
-    date = serializers.DateTimeField(auto_now=False)
-    description = serializers.CharField(max_length=200, null=False)
-    subscription_id = serializers.ForeignKey(
-        'Subscription', 
-        on_delete=models.CASCADE,
-    )
-    insert_date = serializers.DateField(auto_now=True)
-    update_date = serializers.DateTimeField(auto_now=True)
+    date = serializers.DateTimeField()
+    description = serializers.CharField(max_length=200)
+    insert_date = serializers.DateField()
+    update_date = serializers.DateTimeField()

@@ -20,10 +20,10 @@ from . import views
 
 from django.contrib.auth.models import User
 
-from lessons.views import listAPIView, LessonView
+from lessons.views import LessonView
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path('user/<user_id>', ListUserView.as_view()),
+    path('', views.home, name="home"),
+    #path('user/<user_id>', ListUserView.as_view()),
     path('lessons/', LessonView.as_view()),
 ]

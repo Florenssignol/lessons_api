@@ -4,9 +4,9 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from lessons.models import Lesson
 
-from lessons.serializers import UserSerializer, LessonSerializer
+from lessons.serializers import LessonSerializer
 
-from rest_framework.generics import listAPIView, CreateAPIView
+from rest_framework.generics import CreateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -25,11 +25,10 @@ def home(request):
 #         return User.objects.all()
 
 class LessonView(APIView):
-
-    def get(self):
+    def get(self, request):
         queryset = Lesson.objects.all()
         serializer = LessonSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def post(self):
+    def post(self, request):
         pass
