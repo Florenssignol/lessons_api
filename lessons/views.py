@@ -28,6 +28,10 @@ class LessonView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serialize.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request):
+        lesson.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 class AccountView(APIView):
     def get(self, request):
         queryset = Account.objects.all()
@@ -40,6 +44,10 @@ class AccountView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serialize.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        account.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class SubscriptionView(APIView):
     def get(self, request):
@@ -54,6 +62,10 @@ class SubscriptionView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serialize.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request):
+        subscription.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 class StatusView(APIView):
     def get(self, request):
         queryset = Status.objects.all()
@@ -66,6 +78,10 @@ class StatusView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serialize.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        status.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class StudentsView(APIView):
     def get(self, request):
@@ -80,6 +96,10 @@ class StudentsView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serialize.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request):
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        
 # class ListUserView(listAPIView):
 #     serializer_class = UserSerializer
 
