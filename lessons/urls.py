@@ -20,10 +20,14 @@ from . import views
 
 from django.contrib.auth.models import User
 
-from lessons.views import LessonView
+from lessons.views import LessonView, AccountView, SubscriptionView, StatusView, StudentsView
 
 urlpatterns = [
     path('', views.home, name="home"),
     #path('user/<user_id>', ListUserView.as_view()),
     path('lessons/', LessonView.as_view()),
+    path('account/', AccountView.as_view()),
+    path('subscription/', SubscriptionView.as_view()),
+    path('status/', StatusView.as_view()),
+    path('students/', StudentsView.as_view()),
 ]
