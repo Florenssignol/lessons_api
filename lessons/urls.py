@@ -22,12 +22,33 @@ from django.contrib.auth.models import User
 
 from lessons.views import LessonView, AccountView, SubscriptionView, StatusView, StudentsView
 
+# from rest_framework import routers
+
+# router = routers.SimpleRouter()
+# router.register(r'subscription', SubscriptionView, base_name = "subscription")
+# router.register(r'account', AccountView, base_name = "account")
+# urlpatterns = router.urls
+
 urlpatterns = [
-    path('', views.home, name="home"),
-    #path('user/<user_id>', ListUserView.as_view()),
-    path('lessons/', LessonView.as_view()),
-    path('account/', AccountView.as_view()),
-    path('subscription/', SubscriptionView.as_view()),
-    path('status/', StatusView.as_view()),
-    path('students/', StudentsView.as_view()),
+    path('', views.home, name='home'),
+
+    path('account/<id>/', AccountView.as_view(), name='account/student'),
+    path('account/create', AccountView.as_view()),
+
+    path('dashboard/create_sub', SubscriptionView.as_view()),
+    path('dashboard/update_status', SubscriptionView.as_view()),
+
+    path('dashboard/create_lesson', LessonView.as_view()),
+    path('dashboard/<subscription_id>', LessonView.as_view(), name='subscription/lesson'),
+
+    path('account/create_student', StudentsView.as_view()),
+    path('dashboard/enroll_student', StudentsView.as_view(), name='student_lessons'),
+
+    path('dashboard/lesson/<id>', StudentsView.as_view()),
+    
+    # path('lessons/', LessonView.as_view()),
+    # path('account/', AccountView.as_view()),
+    # path('subscription/', SubscriptionView.as_view()),
+    # path('status/', StatusView.as_view()),
+    # path('students/', StudentsView.as_view()),
 ]

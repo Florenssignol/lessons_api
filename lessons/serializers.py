@@ -7,8 +7,9 @@ class LessonSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     date = serializers.DateTimeField()
     description = serializers.CharField(max_length=200)
-    insert_date = serializers.DateField()
+    insert_date = serializers.DateTimeField()
     update_date = serializers.DateTimeField()
+    status_id = serializers.PrimaryKeyRelatedField(queryset=Subscription.objects.all())
 
     def create(self, validated_data):
         return Lesson.object.create(**validated_data)
@@ -27,11 +28,11 @@ class AccountSerializer(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
     address = serializers.CharField()
-    insert_date = serializers.DateField()
+    insert_date = serializers.DateTimeField()
     update_date = serializers.DateTimeField()
 
     def create(self, validated_data):
-        return Account.object.create(**validated_data)
+        return Account.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
@@ -47,8 +48,10 @@ class SubscriptionSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     status = serializers.CharField()
     subscription_date = serializers.DateTimeField()
-    insert_date = serializers.DateField()
+    insert_date = serializers.DateTimeField()
     update_date = serializers.DateTimeField()
+    account_id = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
+    status_id = serializers.PrimaryKeyRelatedField(queryset=Status.objects.all())
 
     def create(self, validated_data):
         return Account.object.create(**validated_data)
@@ -64,7 +67,7 @@ class SubscriptionSerializer(serializers.Serializer):
 class StatusSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
-    insert_date = serializers.DateField()
+    insert_date = serializers.DateTimeField()
     update_date = serializers.DateTimeField()
 
     def create(self, validated_data):
@@ -83,8 +86,9 @@ class StudentsSerializer(serializers.Serializer):
     last_name = serializers.CharField()
     birthdate = serializers.DateField()
     email = serializers.CharField()
-    insert_date = serializers.DateField()
+    insert_date = serializers.DateTimeField()
     update_date = serializers.DateTimeField()
+    account_id = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
 
     def create(self, validated_data):
         return Account.object.create(**validated_data)
