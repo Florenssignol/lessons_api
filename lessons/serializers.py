@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 from lessons.models import Lesson, Account, Subscription, Status, Students
 
 class LessonSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(read_only=True)
     date = serializers.DateTimeField()
     description = serializers.CharField(max_length=200)
-    insert_date = serializers.DateTimeField()
-    update_date = serializers.DateTimeField()
+    insert_date = serializers.DateTimeField(read_only=True)
+    update_date = serializers.DateTimeField(read_only=True)
     status_id = serializers.PrimaryKeyRelatedField(queryset=Subscription.objects.all())
 
     def create(self, validated_data):
@@ -23,13 +23,13 @@ class LessonSerializer(serializers.Serializer):
         return instance
 
 class AccountSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
     email = serializers.CharField()
     password = serializers.CharField()
     address = serializers.CharField()
-    insert_date = serializers.DateTimeField()
-    update_date = serializers.DateTimeField()
+    insert_date = serializers.DateTimeField(read_only=True)
+    update_date = serializers.DateTimeField(read_only=True)
 
     def create(self, validated_data):
         return Account.objects.create(**validated_data)
@@ -45,11 +45,11 @@ class AccountSerializer(serializers.Serializer):
         return instance
 
 class SubscriptionSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(read_only=True)
     status = serializers.CharField()
     subscription_date = serializers.DateTimeField()
-    insert_date = serializers.DateTimeField()
-    update_date = serializers.DateTimeField()
+    insert_date = serializers.DateTimeField(read_only=True)
+    update_date = serializers.DateTimeField(read_only=True)
     account_id = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
     status_id = serializers.PrimaryKeyRelatedField(queryset=Status.objects.all())
 
@@ -65,10 +65,10 @@ class SubscriptionSerializer(serializers.Serializer):
         return instance
 
 class StatusSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
-    insert_date = serializers.DateTimeField()
-    update_date = serializers.DateTimeField()
+    insert_date = serializers.DateTimeField(read_only=True)
+    update_date = serializers.DateTimeField(read_only=True)
 
     def create(self, validated_data):
         return Account.object.create(**validated_data)
@@ -81,13 +81,13 @@ class StatusSerializer(serializers.Serializer):
         return instance
 
 class StudentsSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(read_only=True)
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     birthdate = serializers.DateField()
     email = serializers.CharField()
-    insert_date = serializers.DateTimeField()
-    update_date = serializers.DateTimeField()
+    insert_date = serializers.DateTimeField(read_only=True)
+    update_date = serializers.DateTimeField(read_only=True)
     account_id = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
 
     def create(self, validated_data):

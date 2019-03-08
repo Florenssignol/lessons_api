@@ -6,7 +6,7 @@ class Account(models.Model):
     email = models.CharField(max_length=200, null=False)
     password = models.CharField(max_length=255, null=False)
     address = models.CharField(max_length=255, null=True)
-    insert_date = models.DateField(auto_now_add=True)
+    insert_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
 class Subscription(models.Model):
@@ -20,13 +20,13 @@ class Subscription(models.Model):
         'Status', 
         on_delete=models.CASCADE,
     )
-    insert_date = models.DateField(auto_now_add=True)
+    insert_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
 class Status(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, null=False)
-    insert_date = models.DateField(auto_now_add=True)
+    insert_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
 class Lesson(models.Model):
@@ -37,7 +37,7 @@ class Lesson(models.Model):
         'Subscription', 
         on_delete=models.CASCADE,
     )
-    insert_date = models.DateField(auto_now_add=True)
+    insert_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
 class Students(models.Model):
@@ -51,5 +51,5 @@ class Students(models.Model):
         on_delete=models.CASCADE,
     )
     lessons = models.ManyToManyField(Lesson)
-    insert_date = models.DateField(auto_now_add=True)
+    insert_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
