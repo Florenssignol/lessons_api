@@ -46,9 +46,12 @@ urlpatterns = [
 
     path('dashboard/lesson/<id>', StudentsView.as_view()),
     
+    #path('user/<user_id>', ListUserView.as_view()),
     # path('lessons/', LessonView.as_view()),
     # path('account/', AccountView.as_view()),
     # path('subscription/', SubscriptionView.as_view()),
     # path('status/', StatusView.as_view()),
     # path('students/', StudentsView.as_view()),
+    # path('account/delete_student/<student_id>', StudentsView.as_view()),
+
 ]

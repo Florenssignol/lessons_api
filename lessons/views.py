@@ -13,6 +13,7 @@ from rest_framework import status
 
 import json
 
+
 def home(request): 
     return HttpResponse("<h1>Home</h1>")
 
@@ -29,9 +30,15 @@ class LessonView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
     def delete(self, request):
         lesson.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    def patch(self, pk, request):
+        print(pk)
+        serializer = LessonSerializer(data=request.data)
+        
 
 class AccountView(APIView):
     def get(self, request):
@@ -96,6 +103,11 @@ class StudentsView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request): 
+        serializer = StudentsSerializer(data=request.data)
+        serializer.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def delete(self, request):
         student.delete()

@@ -10,6 +10,7 @@ class LessonSerializer(serializers.Serializer):
     insert_date = serializers.DateTimeField(read_only=True)
     update_date = serializers.DateTimeField(read_only=True)
     status_id = serializers.PrimaryKeyRelatedField(queryset=Subscription.objects.all())
+    lesson_locked = serializers.BooleanField()
 
     def create(self, validated_data):
         return Lesson.object.create(**validated_data)

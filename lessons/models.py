@@ -39,6 +39,7 @@ class Lesson(models.Model):
     )
     insert_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
+    lesson_locked = models.BooleanField()
 
 class Students(models.Model):
     id = models.AutoField(primary_key=True)
