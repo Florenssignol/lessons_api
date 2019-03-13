@@ -41,10 +41,15 @@ class LessonView(APIView):
         
 
 class AccountView(APIView):
-    def get(self, request):
-        queryset = Account.objects.all()
-        serializer = AccountSerializer(queryset, many=True)
+    def get(self, request, pk):
+        account = Account.objects.get(pk=pk)
+        serializer = AccountSerializer(account)
+
         return Response(serializer.data)
+    # def get(self, request):
+    #     queryset = Account.objects.all()
+    #     serializer = AccountSerializer(queryset, many=True)
+    #     return Response(serializer.data)
 
     def post(self, request):
         serializer = AccountSerializer(data=request.data)

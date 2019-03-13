@@ -32,7 +32,7 @@ from lessons.views import LessonView, AccountView, SubscriptionView, StatusView,
 urlpatterns = [
     path('', views.home, name='home'),
 
-    path('account/<id>/', AccountView.as_view(), name='account/student'),
+    path('account/<int:pk>', AccountView.as_view(), name='account/student'),
     path('account/create', AccountView.as_view()),
 
     path('dashboard/create_sub', SubscriptionView.as_view()),
