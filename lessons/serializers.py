@@ -10,6 +10,7 @@ class LessonSerializer(serializers.Serializer):
     insert_date = serializers.DateTimeField(read_only=True)
     update_date = serializers.DateTimeField(read_only=True)
     status_id = serializers.PrimaryKeyRelatedField(queryset=Subscription.objects.all())
+    lesson_locked = serializers.BooleanField()
 
     def create(self, validated_data):
         return Lesson.object.create(**validated_data)
@@ -46,7 +47,6 @@ class AccountSerializer(serializers.Serializer):
 
 class SubscriptionSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    status = serializers.CharField()
     subscription_date = serializers.DateTimeField()
     insert_date = serializers.DateTimeField(read_only=True)
     update_date = serializers.DateTimeField(read_only=True)
@@ -54,7 +54,7 @@ class SubscriptionSerializer(serializers.Serializer):
     status_id = serializers.PrimaryKeyRelatedField(queryset=Status.objects.all())
 
     def create(self, validated_data):
-        return Account.object.create(**validated_data)
+        return Subscription.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.status = validated_data.get('status', instance.status)
@@ -71,7 +71,7 @@ class StatusSerializer(serializers.Serializer):
     update_date = serializers.DateTimeField(read_only=True)
 
     def create(self, validated_data):
-        return Account.object.create(**validated_data)
+        return Status.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
@@ -91,7 +91,7 @@ class StudentsSerializer(serializers.Serializer):
     account_id = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all())
 
     def create(self, validated_data):
-        return Account.object.create(**validated_data)
+        return Students.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.first_name = validated_data.get('first_name', instance.first_name)
