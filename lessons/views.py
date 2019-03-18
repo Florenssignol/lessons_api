@@ -13,6 +13,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+from django.core.exceptions import ObjectDoesNotExist
+
 import json
 
 
@@ -42,7 +44,10 @@ class LessonView(APIView):
 
 class AccountView(APIView):
     def get(self, request, pk):
-        account = Account.objects.get(pk=pk)
+        try:
+            account = Account.objects.get(pk=pk)
+        except ObjectDoesNotExist:
+            return Response({}, status=status.HTTP_404_NOT_FOUND)
         serializer = AccountSerializer(account)
 
         return Response(serializer.data)

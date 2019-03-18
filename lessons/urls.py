@@ -34,7 +34,7 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     path('account/<int:pk>', AccountView.as_view(), name='account/student'),
-    path('account/create', AccountView.as_view()),
+    path('account/create', AccountView.as_view(), name='account/create'),
 
     path('dashboard/create_sub', SubscriptionView.as_view()),
     path('dashboard/update_status', SubscriptionView.as_view()),
