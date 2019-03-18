@@ -31,6 +31,8 @@ class AccountSerializer(serializers.Serializer):
     address = serializers.CharField()
     insert_date = serializers.DateTimeField(read_only=True)
     update_date = serializers.DateTimeField(read_only=True)
+    #added for Hugo's API client
+    account_id = serializers.IntegerField(read_only=True)
 
     def create(self, validated_data):
         return Account.objects.create(**validated_data)
