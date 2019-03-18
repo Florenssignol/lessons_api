@@ -22,6 +22,7 @@ from django.contrib.auth.models import User
 
 from lessons.views import LessonView, AccountView, SubscriptionView, StatusView, StudentsView
 
+""" Tried to implement the routers from rest_framework, but I am still working on it"""
 # from rest_framework import routers
 
 # router = routers.SimpleRouter()
@@ -45,13 +46,4 @@ urlpatterns = [
     path('dashboard/enroll_student', StudentsView.as_view(), name='student_lessons'),
 
     path('dashboard/lesson/<id>', StudentsView.as_view()),
-    
-    #path('user/<user_id>', ListUserView.as_view()),
-    # path('lessons/', LessonView.as_view()),
-    # path('account/', AccountView.as_view()),
-    # path('subscription/', SubscriptionView.as_view()),
-    # path('status/', StatusView.as_view()),
-    # path('students/', StudentsView.as_view()),
-    # path('account/delete_student/<student_id>', StudentsView.as_view()),
-
 ]

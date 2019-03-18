@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+# from django.template import RequestContext
+# return render_to_response('fileupload/upload.html', {'form': c['UploadFileForm']})
 
 from django.contrib.auth.models import User
 from lessons.models import Lesson, Account, Subscription, Status, Students
@@ -30,13 +32,11 @@ class LessonView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
     def delete(self, request):
         lesson.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
     def patch(self, pk, request):
-        print(pk)
         serializer = LessonSerializer(data=request.data)
         
 
@@ -46,13 +46,10 @@ class AccountView(APIView):
         serializer = AccountSerializer(account)
 
         return Response(serializer.data)
-    # def get(self, request):
-    #     queryset = Account.objects.all()
-    #     serializer = AccountSerializer(queryset, many=True)
-    #     return Response(serializer.data)
 
     def post(self, request):
         serializer = AccountSerializer(data=request.data)
+        # data= {"data": data.__dict__}
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -61,6 +58,7 @@ class AccountView(APIView):
     def delete(self, request):
         account.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class SubscriptionView(APIView):
     def get(self, request):
@@ -79,6 +77,7 @@ class SubscriptionView(APIView):
         subscription.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class StatusView(APIView):
     def get(self, request):
         queryset = Status.objects.all()
@@ -95,6 +94,7 @@ class StatusView(APIView):
     def delete(self, request):
         status.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class StudentsView(APIView):
     def get(self, request):
@@ -114,9 +114,9 @@ class StudentsView(APIView):
         serializer.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    def delete(self, request):
-        student.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    # def delete(self, request):
+    #     student.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
         
 # class ListUserView(listAPIView):
 #     serializer_class = UserSerializer
@@ -126,3 +126,5 @@ class StudentsView(APIView):
 #         if user_id is not None:
 #             return User.objects.filter(id=user_id)
 #         return User.objects.all()
+
+
